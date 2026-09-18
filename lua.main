@@ -1,0 +1,144 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ServerDestroyPanel"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 580, 0, 420)
+mainFrame.Position = UDim2.new(0.5, -290, 0.5, -210)
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+mainFrame.BorderColor3 = Color3.fromRGB(255, 69, 0)
+mainFrame.BorderSizePixel = 4
+mainFrame.Parent = screenGui
+
+local headerFrame = Instance.new("Frame")
+headerFrame.Name = "HeaderFrame"
+headerFrame.Size = UDim2.new(1, 0, 0, 60)
+headerFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+headerFrame.BorderSizePixel = 0
+headerFrame.Parent = mainFrame
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, -140, 1, 0)
+titleLabel.Position = UDim2.new(0, 70, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Server Destruction"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 26
+titleLabel.Parent = headerFrame
+
+local leftImage = Instance.new("ImageLabel")
+leftImage.Size = UDim2.new(0, 50, 0, 50)
+leftImage.Position = UDim2.new(0, 10, 0, 5)
+leftImage.BackgroundTransparency = 1
+leftImage.Image = "rbxassetid://125494725096524"
+leftImage.Parent = headerFrame
+
+local rightImage = Instance.new("ImageLabel")
+rightImage.Size = UDim2.new(0, 50, 0, 50)
+rightImage.Position = UDim2.new(1, -60, 0, 5)
+rightImage.BackgroundTransparency = 1
+rightImage.Image = "rbxassetid://125494725096524"
+rightImage.Parent = headerFrame
+
+local divider = Instance.new("Frame")
+divider.Size = UDim2.new(1, 0, 0, 3)
+divider.Position = UDim2.new(0, 0, 1, 0)
+divider.BackgroundColor3 = Color3.fromRGB(255, 69, 0)
+divider.BorderSizePixel = 0
+divider.Parent = headerFrame
+
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+	local delta = input.Position - dragStart
+	mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+headerFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = mainFrame.Position
+		
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+headerFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Size = UDim2.new(1, -20, 1, -75)
+scrollFrame.Position = UDim2.new(0, 10, 0, 75)
+scrollFrame.BackgroundTransparency = 1
+scrollFrame.BorderSizePixel = 0
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 1400)
+scrollFrame.ScrollBarThickness = 6
+scrollFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 69, 0)
+scrollFrame.Parent = mainFrame
+
+local uiGrid = Instance.new("UIGridLayout")
+uiGrid.CellSize = UDim2.new(0, 85, 0, 55)
+uiGrid.CellPadding = UDim2.new(0, 8, 0, 8)
+uiGrid.SortOrder = Enum.SortOrder.LayoutOrder
+uiGrid.Parent = scrollFrame
+
+local buttonList = {
+	"Head Shake", "Mesh Disco", "Armless", "Plane Arms", "Dev Uzi", "Floating Pad",
+	"Chicken Arms", "Disco Character", "Mutation", "Neon Disco", "Btools", "Barrier For Torso",
+	"Wall Walking", "Special Thing [Shirt]", "Special Thing [Pants]", "Fakelag", "Knife", "F3X",
+	"Seeing Hand", "John Doe", "Chara Ultimate", "Thomas", "SnowBall", "AK47",
+	"Steve", "Goner", "Stemzelen Mano", "Speeding Wall", "i0rb", "Pee",
+	"Become 2sp00ks [HD ADMIN]", "Become 1x3x5x6 [HD ADMIN]", "Become E. Citizen [HD ADMIN]", "TPtool", "illuminati Laser", "KatanaV2",
+	"Become Old c00lkidd skin", "Become Peter Griffin", "Become Siberian Guy", "Ban Hammer", "SpiderBot", "Lua Hammer",
+	"Clone", "Create NPC", "Fake Character", "Special Thing [Hand]", "Infiltration", "Swim in Air",
+	"Red Fire Player", "Normal Fire Player", "Orange Fire Player", "Black Fire Player", "Gray Fire Player", "Keyboard",
+	"UnFire Player", "2sp00ks Decally Face", "Pumpkin Decally Face", "Selim Dede Decally Face", "PINGU Decally Face", "Stemzelen Mano Decally Face"
+}
+
+local function createButton(name)
+	local btn = Instance.new("TextButton")
+	btn.Name = name
+	btn.Text = name
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.TextSize = 15
+	btn.Font = Enum.Font.SourceSans
+	btn.TextWrapped = true
+	btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	btn.BorderColor3 = Color3.fromRGB(255, 69, 0)
+	btn.BorderSizePixel = 2
+	btn.Parent = scrollFrame
+
+	btn.MouseButton1Click:Connect(function()
+		btn.BackgroundColor3 = Color3.fromRGB(255, 69, 0)
+		btn.TextColor3 = Color3.fromRGB(0, 0, 0)
+		task.wait(0.1)
+		btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+		btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end)
+end
+
+for _, name in ipairs(buttonList) do 
+	createButton(name) 
+end
