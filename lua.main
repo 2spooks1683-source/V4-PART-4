@@ -4,7 +4,7 @@ local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 local playerGui = player:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "ServerDestroyPanel"
+screenGui.Name = "AvatarChangePanel"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
