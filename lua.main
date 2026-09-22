@@ -109,7 +109,7 @@ local buttonList = {
 	"Chicken Arms", "Disco Character", "Mutation", "Neon Disco", "Btools", "Barrier For Torso",
 	"Wall Walking", "Special Thing [Shirt]", "Special Thing [Pants]", "Fakelag", "Knife", "F3X",
 	"Seeing Hand", "John Doe", "Chara Ultimate", "Thomas", "SnowBall [HD ADMIN]", "AK47",
-	"Steve", "Goner", "Stemzelen Mano", "Speeding Wall", "i0rb", "Pee",
+	"Steve", "Goner", "Szemtelen Mano", "Speeding Wall", "i0rb V2", "Pee",
 	"Become 2sp00ks [HD ADMIN]", "Become 1x3x5x6 [HD ADMIN]", "Become E. Citizen [HD ADMIN]", "TPtool", "illuminati Laser", "KatanaV2",
 	"Become Old c00lkidd skin", "Become Peter Griffin", "Become Siberian Guy", "Ban Hammer", "SpiderBot", "Lua Hammer",
 	"Clone", "Create NPC", "Fake Character", "Special Thing [Hand]", "Infiltration", "Swim in Air",
@@ -167,3 +167,8 @@ scrollFrame:FindFirstChild("Chara Ultimate").MouseButton1Click:Connect(function(
 scrollFrame:FindFirstChild("Thomas").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/2spooks1683-source/Thomas-Script/refs/heads/main/lua.main"))() end)
 scrollFrame:FindFirstChild("SnowBall [HD ADMIN]").MouseButton1Click:Connect(function() local ReplicatedStorage = game:GetService("ReplicatedStorage"); local RequestCommand = ReplicatedStorage:WaitForChild("HDAdminHDClient").Signals.RequestCommandSilent; RequestCommand:InvokeServer(":gear me 19328185") end)
 scrollFrame:FindFirstChild("AK47").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/sinret/rbxscript.com-scripts-reuploads-/main/ak47", true))() end)
+scrollFrame:FindFirstChild("Steve").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/ian49972/SCRIPTS/refs/heads/main/Steve"))() end)
+scrollFrame:FindFirstChild("Goner").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-Goner-Scrpit-82044"))() end)
+scrollFrame:FindFirstChild("Szemtelen Mano").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/2spooks1683-source/Mano-Ball-/refs/heads/main/lua.main"))() end)
+scrollFrame:FindFirstChild("i0rb V2").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://pastebin.com/raw/tG78B3C4"))() end)
+scrollFrame:FindFirstChild("Pee").MouseButton1Click:Connect(function() loadstring(game:HttpGet("https://pastebin.com/raw/ddFyq0My"))() end)
